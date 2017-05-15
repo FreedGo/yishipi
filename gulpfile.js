@@ -12,10 +12,10 @@ var minifyCSS = require('gulp-minify-css');//gulp-minify-css用于压缩CSS;
 // var cssnano   = require('gulp-cssnano');
 var rename    = require('gulp-rename');//gulp-rename 用于重命名
 var scpConfig = {//上传服务器配置
-	host: '139.196.144.56',
+	host: '120.76.25.118',
 	username: 'root',
-	password: '19940915kuN',
-	dest: '/alidata/www/hao3.0/dist/js'
+	password: 'YIshipi@.66'
+	// dest: '/alidata/www/yishipi/skin/default'
 };
 
 /**
@@ -64,11 +64,17 @@ gulp.task('watchjs', function () {
 			// 4. 另存压缩后的文件
 			.pipe(gulp.dest('./dist/js'))
 			// 5.上传到服务器指定目录
-			.pipe(scp(scpConfig)).on('error', function(err) {
+			.pipe(scp({
+					host: scpConfig.host,
+					username: scpConfig.username,
+					password: scpConfig.password,
+					dest: '/alidata/www/yishipi/skin/default/js'
+					}
+				)).on('error', function(err) {
 					console.log(err);
 				})
 
-	})
+			})
 });
 
 /**
@@ -87,11 +93,16 @@ gulp.task('watchAll', function () {
 			// 4. 另存压缩后的文件
 			.pipe(gulp.dest('./dist/js'))
 			// 5.上传到服务器指定目录
-			.pipe(scp(scpConfig)).on('error', function(err) {
+			.pipe(scp({
+				host: '120.76.25.118',
+				username: 'root',
+				password: 'YIshipi@.66',
+				dest: '/alidata/www/yishipi/skin/member/dist/js'
+			})).on('error', function(err) {
 			console.log(err);
 		})
 
-	})
+	});
 	gulp.watch('./css/*.css',function (e) {
 		gulp.src(e.path)
 		// 2. 压缩文件
@@ -103,7 +114,12 @@ gulp.task('watchAll', function () {
 			// 4. 另存压缩后的文件
 			.pipe(gulp.dest('./dist/css'))
 			// 5.上传到服务器指定目录
-			.pipe(scp({scpConfig)).on('error', function(err) {
+			.pipe(scp({
+				host: '120.76.25.118',
+				username: 'root',
+				password: 'YIshipi@.66',
+				dest: '/alidata/www/yishipi/skin/member/dist/css'
+			})).on('error', function(err) {
 			console.log(err);
 		})
 
