@@ -68,20 +68,6 @@ layui.use(['layer', 'element', 'flow', 'laytpl'], function () {
 	//调用一次时间转换函数，不然gulp个缺货不打包这个函数
 	localAllTime(1494839192);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 });
 /**
  * 时间戳转日期（年月日+时分秒）

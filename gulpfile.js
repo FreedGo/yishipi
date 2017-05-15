@@ -14,7 +14,7 @@ var rename    = require('gulp-rename');//gulp-rename 用于重命名
 var scpConfig = {//上传服务器配置
 	host: '120.76.25.118',
 	username: 'root',
-	password: 'YIshipi@.66'
+	password: ''
 	// dest: '/alidata/www/yishipi/skin/default'
 };
 
@@ -94,9 +94,9 @@ gulp.task('watchAll', function () {
 			.pipe(gulp.dest('./dist/js'))
 			// 5.上传到服务器指定目录
 			.pipe(scp({
-				host: '120.76.25.118',
-				username: 'root',
-				password: 'YIshipi@.66',
+                host: scpConfig.host,
+                username: scpConfig.username,
+                password: scpConfig.password,
 				dest: '/alidata/www/yishipi/skin/member/dist/js'
 			})).on('error', function(err) {
 			console.log(err);
@@ -115,9 +115,9 @@ gulp.task('watchAll', function () {
 			.pipe(gulp.dest('./dist/css'))
 			// 5.上传到服务器指定目录
 			.pipe(scp({
-				host: '120.76.25.118',
-				username: 'root',
-				password: 'YIshipi@.66',
+                host: scpConfig.host,
+                username: scpConfig.username,
+                password: scpConfig.password,
 				dest: '/alidata/www/yishipi/skin/member/dist/css'
 			})).on('error', function(err) {
 			console.log(err);
