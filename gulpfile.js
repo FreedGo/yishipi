@@ -14,7 +14,7 @@ var rename    = require('gulp-rename');//gulp-rename 用于重命名
 var scpConfig = {//上传服务器配置
 	host: '120.76.25.118',
 	username: 'root',
-	password: ''
+	password: 'YIshipi@.66'
 	// dest: '/alidata/www/yishipi/skin/default'
 };
 

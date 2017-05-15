@@ -1,0 +1,190 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>[!--class.name--] | [!--title--] - 摄影家族</title>
+    <?php  $classid=$GLOBALS[navclassid]; //取得本栏目id ?>
+    <meta name="keywords" content="[!--pagekey--]">
+    <meta name="description" content="[!--pagedes--]">
+    <link href="https://sheyingcn.oss-cn-shanghai.aliyuncs.com/web/zjk/zjk.css" rel="stylesheet" type="text/css" />
+    <link href="https://sheyingcn.oss-cn-shanghai.aliyuncs.com/web/news/zjk_new_list.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="https://sheyingcn.oss-cn-shanghai.aliyuncs.com/jquery/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="https://sheyingcn.oss-cn-shanghai.aliyuncs.com/web/supers/jquery.SuperSlide.2.1.js"></script>
+    <!---- 弹出框特效 ---->
+    <script type="text/javascript" src="https://sheyingcn.oss-cn-shanghai.aliyuncs.com/alert/js/sweet-alert.js"></script>
+    <script type="text/javascript" src="/zjk/login/zjk_login.js"></script>
+    <link href="https://sheyingcn.oss-cn-shanghai.aliyuncs.com/alert/css/sweet-alert.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="/d/fx/share.min.css">
+</head>
+<body>
+<!---- 头部开始 ---->
+[!--temp.header--]
+<!---- 头部结束 ---->
+
+<div class="main">
+    <div class="new_list_ng">[!--newsnav--] > [!--title--]</div>
+    <div class="clearfix">
+        <!--- 左侧 --->
+        <div class="L list_L clearfix">
+            <div class="news_title">[!--title--]</div>
+
+            <div class="clearfix">
+                <div class="news_time L">
+                    <ul class="clearfix">
+                        <li>发布时间：[!--newstime--]</li>
+                        <!--<li>来源：<a href="">[!--picfrom--]</a></li>-->
+                        <li>作者：<a href="">[!--username--]</a></li>
+                        <li>观看量：<script src=[!--news.url--]e/public/ViewClick/?classid=[!--classid--]&id=[!--id--]></script></li>
+                        <li>评论数：<script src=[!--news.url--]e/public/ViewClick/?classid=[!--classid--]&id=[!--id--]></script></li>
+                    </ul>
+                </div>
+                <div class="R">
+                    <li class="row">
+                        <div id="share-2"></div>
+                    </li>
+                </div>
+            </div>
+
+            <!--正文-->
+            <div class="news_newstext">
+                <div class="news_top_img"><img src="<?=titurlpic($navinfor['photos'])?>"/></div>
+                <div class="photo_list">
+                    温馨提示：鼠标点击图片可查看大图，鼠标滑轮或键盘<- ->可切换照片，一般人我不告诉他。
+                </div>
+                <!--图集展示-->
+                <link href="/d/photo_tx/css/lightgallery.css" rel="stylesheet">
+
+                <div class="demo-gallery">
+                    <ul id="lightgallery" class="list-unstyled row clearfix">
+                        <?php
+                    	$poto=substr($navinfor['photos'], 0, -6);
+                        $flid1=explode("::::::",$poto);
+                        $length = count($flid1);
+                        for($i=0;$i<$length;$i++){
+                    ?>
+                        <li class="col-xs-6 col-sm-4 col-md-3" data-responsive="img/1-375.jpg 375, img/1-480.jpg 480, img/1.jpg 800" data-src="<?=$flid1[$i]?>" data-sub-html="<h4>[!--title--]</h4><p><?=laytext($navinfor[picsay])?></p>">
+                            <a href="">
+                                <img class="img-responsive" src="<?=$flid1[$i]?>?x-oss-process=style/photopp-list" alt="[!--title--]">
+                                <div class="demo-gallery-poster">
+                                    <img src="/d/photo_tx/img/zoom.png"/>
+                                </div>
+                            </a>
+                        </li>
+                        <?
+                      	}
+                    ?>
+
+
+                    </ul>
+                </div>
+                <script type="text/javascript">
+                    $(document).ready(function(){
+                        $('#lightgallery').lightGallery();
+                    });
+                </script>
+                <script src="/d/photo_tx/js/picturefill.min.js"></script>
+                <script src="/d/photo_tx/js/lightgallery.js"></script>
+                <script src="/d/photo_tx/js/lg-fullscreen.js"></script>
+                <script src="/d/photo_tx/js/lg-thumbnail.js"></script>
+                <script src="/d/photo_tx/js/lg-video.js"></script>
+                <script src="/d/photo_tx/js/lg-autoplay.js"></script>
+                <script src="/d/photo_tx/js/lg-zoom.js"></script>
+                <script src="/d/photo_tx/js/lg-hash.js"></script>
+                <script src="/d/photo_tx/js/lg-pager.js"></script>
+                <!--<script src="/d/photo_tx/jquery.mousewheel.min.js"></script>
+                -->
+                <!--图集展示结束-->
+                <div><script type="text/javascript" src="/d/js/acmsd/thea9.js"></script></div>
+                <div class="news_text"><?=laytext($navinfor[picsay])?><samp class="banquan_ts"><a href="">投诉此图集</a></samp></div>
+
+                <div class="fx_NO2">
+                    <li class="row">
+                        <div class="social-share" data-mode="prepend"> <a href="javascript:" class="social-share-icon icon-heart"></a> </div>
+                    </li>
+                </div>
+                <script type="text/javascript" src="/d/fx/jquery.share.min.js"></script>
+                <script type="text/javascript">
+                    $('#share-2').share({
+                        sites: ['qzone', 'qq', 'weibo','wechat'],
+                        image:$('.img-responsive').attr('src'),
+//                        title:'可以不设,默认抓title标签',
+                        description:'[!--pagedes--]'
+                    });
+                </script>
+                <!---评论--->
+                <div class="">
+                    [!--temp.chang--]
+                </div>
+            </div>
+        </div>
+
+        <!--- 右侧 --->
+        <div class="R list_R">
+            <!---- 300*150 ---->
+            <div class="list_R_ggao_NO1"><img src="https://sheyingcn.oss-cn-shanghai.aliyuncs.com/web/news/53863352695169.jpg"  height="150"/></div>
+            <!---- 排行榜 ---->
+            <div class="list_R_NO1">
+                <!---栏目--->
+                <div class="list_R_NO1_biao">热门推荐</div>
+                [e:loop={"select * from phome_ecms_photo where classid='$classid' order by onclick desc limit 5",10,24,0}]
+                <div class="clearfix list_NO1">
+                    <div class="L list_R_NO1_img"><img src="<?=titurlpic($bqr[photos])?>" alt="<?=$bqr[title]?>"/></div>
+                    <div class="L list_R_NO2_tit">
+                        <div class="list_R_NO1_tit"><?=$bqr[title]?></div>
+                        <div class="clearfix list_R_NO1_time">
+                            <div class="L"><?=format_datetime($bqr[newstime],'Y-m-d')?></div>
+                            <div class="R">浏览量：<?=$bqr[onclick]?></div>
+                        </div>
+                    </div>
+                </div>
+                [/e:loop]
+            </div>
+
+            <div class="list_R_ggao_NO2"><script type="text/javascript" src="/d/js/acmsd/thea11.js"></script></div>
+
+            <div class="list_R_NO1">
+                <div class="list_R_NO1_biao">热门推荐</div>
+                [e:loop={"select * from phome_ecms_photo where classid='$classid' order by onclick desc limit 5",10,24,0}]
+                <div class="clearfix list_NO1">
+                    <div class="L list_R_NO1_img"><img src="<?=titurlpic($bqr[photos])?>" alt="<?=$bqr[title]?>"/></div>
+                    <div class="L list_R_NO2_tit">
+                        <div class="list_R_NO1_tit"><?=$bqr[title]?></div>
+                        <div class="clearfix list_R_NO1_time">
+                            <div class="L"><?=format_datetime($bqr[newstime],'Y-m-d')?></div>
+                            <div class="R">浏览量：<?=$bqr[onclick]?></div>
+                        </div>
+                    </div>
+                </div>
+                [/e:loop]
+            </div>
+
+            <div class="list_R_ggao_NO2"><script type="text/javascript" src="/d/js/acmsd/thea11.js"></script></div>
+        </div>
+    </div>
+
+
+</div>
+
+<!------ 横幅广告 ------>
+<div class="bg_1200 main"><script type="text/javascript" src="/d/js/acmsd/thea3.js"></script></div>
+<!----- 横幅广告 ----->
+
+
+<!------ 猜你喜欢 ------>
+
+<!--- 友情链接 ---->
+<div class="youlian main">
+    <div class="clearfix youlian_bist">
+        <div class="L">友情链接</div>
+        <div class="R"><img src="https://sheyingcn.oss-cn-shanghai.aliyuncs.com/web/index/images/QQ1.png" /></div>
+    </div>
+    <ul class="clearfix">
+        [e:loop={"select * from {$dbtbpre}enewslink where classid=13 order by lid desc",0,24,0}]
+        <li><a href="<?=$bqr['lurl']?>"><?=$bqr['lname']?></a></li>
+        [/e:loop]
+    </ul>
+</div>
+<!---底部开始--->
+[!--temp.footer--]
+</body>
+</html>

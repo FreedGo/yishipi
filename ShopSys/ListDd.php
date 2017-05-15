@@ -500,6 +500,7 @@ $ywcnum = $empire->gettotal("select count(*) as total from {$dbtbpre}enewsshopdd
 					</ul>
 					<div class="layui-tab-content">
 						<div class="layui-tab-item layui-show ">
+                            <!--列表头部的标题-->
 							<table class="layui-table " lay-skin="nob">
 								<colgroup>
 									<col width="265">
@@ -522,13 +523,18 @@ $ywcnum = $empire->gettotal("select count(*) as total from {$dbtbpre}enewsshopdd
 								</tr>
 								</thead>
 							</table>
-							<ul class="dd-list " id="ddList0">
+                            <!--列表-->
+                            <ul class="dd-list " id="ddList0">
 								<li>
 									<!--加载动画..-->
 									<i class="layui-icon layui-anim layui-anim-rotate layui-anim-loop layui-icon-loading">&#xe63d;</i>
 								</li>
 							</ul>
-						</div>
+                            <!--/--列表-->
+                            <!--分页-->
+                            <div class="pages0"></div>
+                            <!--分页-->
+                        </div>
 						<div class="layui-tab-item">
 							<table class="layui-table " lay-skin="nob">
 								<colgroup>
@@ -558,7 +564,8 @@ $ywcnum = $empire->gettotal("select count(*) as total from {$dbtbpre}enewsshopdd
 									<i class="layui-icon layui-anim layui-anim-rotate layui-anim-loop layui-icon-loading">&#xe63d;</i>
 								</li>
 							</ul>
-						</div>
+                            <div class="pages1"></div>
+                        </div>
 						<div class="layui-tab-item">
 							<table class="layui-table " lay-skin="nob">
 								<colgroup>
@@ -588,7 +595,8 @@ $ywcnum = $empire->gettotal("select count(*) as total from {$dbtbpre}enewsshopdd
 									<i class="layui-icon layui-anim layui-anim-rotate layui-anim-loop layui-icon-loading">&#xe63d;</i>
 								</li>
 							</ul>
-						</div>
+                            <div class="pages2"></div>
+                        </div>
 						<div class="layui-tab-item">
 							<table class="layui-table " lay-skin="nob">
 								<colgroup>
@@ -618,7 +626,8 @@ $ywcnum = $empire->gettotal("select count(*) as total from {$dbtbpre}enewsshopdd
 									<i class="layui-icon layui-anim layui-anim-rotate layui-anim-loop layui-icon-loading">&#xe63d;</i>
 								</li>
 							</ul>
-						</div>
+                            <div class="pages3"></div>
+                        </div>
 						<div class="layui-tab-item">内容5</div>
 					</div>
 				</div>
