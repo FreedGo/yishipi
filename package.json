@@ -1,0 +1,29 @@
+{
+  "name": "yishipi",
+  "version": "1.0.0",
+  "description": "一时批部分内容",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FreedGo/yishipi.git"
+  },
+  "author": "freed",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FreedGo/yishipi/issues"
+  },
+  "homepage": "https://github.com/FreedGo/yishipi#readme",
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "gulp": "^3.9.1",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-rename": "^1.2.2",
+    "gulp-rsync": "0.0.7",
+    "gulp-scp2": "^0.2.0",
+    "gulp-uglify": "^2.1.2",
+    "layui": "0.0.1"
+  }
+}
