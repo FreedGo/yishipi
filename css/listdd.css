@@ -121,6 +121,7 @@
 	color: #fff!important;
 	cursor: pointer;
 	margin-bottom: 2px;
+	display: inline-block;
 }
 .order-com-button-gray{
 	padding: 3px 10px;
@@ -129,6 +130,7 @@
 	color: #fff!important;
 	cursor: pointer;
 	margin-bottom: 2px;
+	display: inline-block;
 }
 .order-com-button a{
 	color: #fff;
@@ -151,9 +153,10 @@
 	padding-left: 5px;
 }
 .get-wuliu-msg{
-	color: #F9B662;
+	color: #d94a4a;
 	font:14px/24px 微软雅黑;
 	text-decoration: underline;
+	cursor: pointer;
 }
 .last-total-price>dl{
 	font:14px/24px 微软雅黑;
@@ -235,3 +238,27 @@
 	height: 100%;
 }
 /*--/--订单相关 */
+
+
+
+
+/*订单详情*/
+.detaill-msg-mon{
+	padding-left: 15px;
+	border-top: #ccc solid 1px;
+	line-height:35px;
+	height:35px;
+}
+.wuliu-msg-show{
+	padding: 20px;
+	font: 14px/24px 'Microsoft Yahei';
+}
+.msg-item{
+	border-bottom:#ccc solid 1px;
+}
+.msg-item:nth-child(1){
+	color: red;
+}
+.wuliu-msg-warp{
+	display: none;
+}

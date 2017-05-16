@@ -35,35 +35,35 @@ layui.use(['layer', 'element', 'flow', 'laytpl','laypage'], function () {
 			for(var i = 0; i<msg.length;i++){
 				switch (msg[i].type){
 					//微付款
-					case '0':
+					case 0:
 						allOrders.status1.push(msg[i]);
 						break;
 						//取消订单
-					case '1':
+					case 1:
 						allOrders.status4.push(msg[i]);
 						break;
 						//待确认收货
-					case '2':
+					case 2:
 						allOrders.status2.push(msg[i]);
 						break;
 					//确认收货
-					case '3':
+					case 3:
 						allOrders.status4.push(msg[i]);
 						break;
 					//申请退款
-					case '4':
+					case 4:
 						allOrders.status3.push(msg[i]);
 						break;
 					//拒绝退款
-					case '5':
+					case 5:
 						allOrders.status3.push(msg[i]);
 						break;
 					//申请售后
-					case '6':
+					case 6:
 						allOrders.status3.push(msg[i]);
 						break;
 					//申请退款（已付款未发货）
-					case '7':
+					case 7:
 						allOrders.status3.push(msg[i]);
 						break;
 				}
@@ -98,11 +98,6 @@ layui.use(['layer', 'element', 'flow', 'laytpl','laypage'], function () {
 		var data4 = {
 			"list":allOrders.status3
 		};
-		console.log(allOrders);
-		console.log(data1);
-		console.log(data2);
-		console.log(data3);
-		console.log(data4);
 
 		// 渲染全部订单d
 		var getTpl0 =allLists0.innerHTML;
@@ -457,4 +452,75 @@ function rengongkefu(id) {
 	}, function(){
 		layer.close(confirmIndex);
 	});
+}
+
+function getWuliu(kdid) {
+    /**
+     * 6.2 物流查询
+     */
+        var expressNum = $('.show-express-number').text();
+        if (/\d/g.test(parseInt(expressNum))) {
+            var companyCode;//快递公司代码
+            var expTrace;//即时物流信息
+            companyCode = getCompanyCode(expressNum);
+            companyCode = companyCode.Shippers[0].ShipperCode;
+            expTrace    = getExpressTrace(expressNum, companyCode);
+            if (expTrace.Success) {
+                $('.wuliu-msg-warp .loaders').hide();
+                $('.wuliu-msg-show').empty();
+                $.each(expTrace.Traces, function (index, val) {
+                    $('.wuliu-msg-show').prepend('<div class="msg-item"><p class="msg-dec">' + val.AcceptStation +
+                        '</p><p class="msg-time">' + val.AcceptTime +
+                        '</p></div>')
+                })
+            } else {
+                $('.wuliu-msg-show').prepend('<div class="msg-item"><p class="msg-dec">查询失败</p></div>')
+            }
+        } else {
+            $('.wuliu-msg-show').prepend('<div class="msg-item"><p class="msg-dec">暂无物流信息</p></div>')
+        }
+}
+/**
+ * 根据运单号获取快递公司的信息
+ * @param expressNum
+ * @return msg ;
+ * msg.Success {boolean} 是否查询成功
+ * msg.Shippers[0].ShipperName 是快递公司名称
+ * msg.Shippers[0].ShipperCode 快递公司代码
+ */
+function getCompanyCode(expressNum) {
+    var getMsg;
+    $.ajax({
+        url  : '/e/shop/class/KdApiOrderDistinguish.php',
+        type : 'post',
+        async: false,
+        data : {'LogisticCode': expressNum}
+    }).done(function (msg) {
+        msg = eval('(' + msg + ')');
+        console.log(msg);
+        getMsg = msg;
+    })
+    return getMsg;
+}
+
+/**
+ * 获取物流信息
+ * @param expressCode {string},快递单号
+ * @param ShipperCode {string},快递公司代码
+ */
+function getExpressTrace(expressCode, ShipperCode) {
+    var getETMsg;
+    $.ajax({
+        url  : '/e/shop/class/KdApiSearchDemo.php',
+        type : 'post',
+        async: false,
+        data : {
+            'LogisticCode': expressCode,
+            'ShipperCode' : ShipperCode
+        }
+    }).done(function (data) {
+        data     = eval('(' + data + ')');
+        getETMsg = data;
+    });
+    return getETMsg;
 }
