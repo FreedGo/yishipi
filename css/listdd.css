@@ -1,5 +1,5 @@
 /**
- * 用于个人中心订单管理
+ * 用于个人中心订单管理的
  * Created by Freed on 2017/5/15.
  * E-mail:flyxz@126.com.
  * GitHub:FreedGo@github.com.
@@ -21,23 +21,33 @@
 .f-l-l{
 	float: left;
 }
+.layui-table tbody tr:hover{
+	background-color: #fff;
+}
 .online-shop-all-orders,.orders-finished,.orders-unfinished,.order-detaill-warp{
 	padding: 10px;
 }
 .order-tiem{
-	border:#ccc solid 1px;
+	/*border:#ccc solid 1px;*/
 	margin-bottom:20px;
+}
+.dd-list .layui-table td,.dd-list .layui-table th{
+	padding: 10px 5px;
+}
+.title-warp{
+	width:265px;
+	overflow: hidden;
 }
 .order-head{
 	height: 34px;
 	background-color: #efefef;
 }
 .order-tiem:hover{
-	border:#ffa5a5 solid 1px;
+	/*border:#ffa5a5 solid 1px;*/
 	/*box-shadow: 0 0 5px rgba(255,84,0,0.7);*/
 }
 .order-head-item{
-	font:12px/34px 微软雅黑;/*订单号过长，字号改为12px*/
+	font:12px/34px 微软雅黑;/*订单号过长，字号改12px*/
 	color: #333;
 	padding-left: 5px;
 }
@@ -57,11 +67,11 @@
 	height:70px;
 	padding-top: 20px;
 }
-.order-body-item{
-	height:48px;
-	margin-bottom: 5px;
-	font:14px/24px 微软雅黑;
-}
+/*.order-body-item{*/
+	/*height:48px;*/
+	/*margin-bottom: 5px;*/
+	/*font:14px/24px 微软雅黑;*/
+/*}*/
 .order-body-item.product-title{
 	line-height: 24px;
 }
@@ -69,17 +79,20 @@
 	width: 48px;
 	height:48px;
 	border:#ccc solid 1px;
-	margin-left: 5px;
+	/*margin-left: 5px;*/
 	overflow: hidden;
+	display: inline-block;
 }
 .product-title{
-	width:200px;
-	margin-left: 10px;
-	font:14px/48px 微软雅黑;
-
+	width:182px;
+	margin-left: 5px;
+	font:12px/24px 微软雅黑;
+	display: inline-block;
+	height: 48px;
+	overflow: hidden;
 }
 .product-title a{
-	font:14px/24px 微软雅黑;
+	font:12px/24px 微软雅黑;
 
 }
 .product-title:hover a{
@@ -102,12 +115,22 @@
 	text-align: center;
 }
 .order-com-button{
-	padding: 5px 10px;
+	padding: 3px 10px;
 	background-color: #62AEFC;
 	border-radius: 4px;
-	color: #fff;
+	color: #fff!important;
+	cursor: pointer;
+	margin-bottom: 2px;
 }
-..order-com-button a{
+.order-com-button-gray{
+	padding: 3px 10px;
+	background-color: #ccc;
+	border-radius: 4px;
+	color: #fff!important;
+	cursor: pointer;
+	margin-bottom: 2px;
+}
+.order-com-button a{
 	color: #fff;
 }
 .look-order-detaill{
@@ -211,4 +234,4 @@
 	width:100%;
 	height: 100%;
 }
-/*--/--订单相关*/
+/*--/--订单相关 */
