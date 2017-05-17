@@ -70,11 +70,11 @@ $ywcnum = $empire->gettotal("select count(*) as total from {$dbtbpre}enewsshopdd
                             <div class="title-warp">
                                 <!--图片-->
                                 <div class="order-body-item product-img f-l-l">
-                                    <a href="{{ subItem.titleurl }}"><img src="{{ subItem.titlepic}}" alt="{{ subItem.title }}"></a>
+                                    <a href="{{ subItem.titleurl }}"><img src="{{ subItem.titlepic}}" alt="{{ subItem.title }}" target="_blank"></a>
                                 </div>
                                 <!--标题-->
                                 <div class="order-body-item product-title f-l-l">
-                                    <a href="{{ subItem.titleurl }}">{{ subItem.title }}</a>
+                                    <a href="{{ subItem.titleurl }}" target="_blank">{{ subItem.title }}</a>
                                 </div>
                             </div>
                         </td>
@@ -87,6 +87,94 @@ $ywcnum = $empire->gettotal("select count(*) as total from {$dbtbpre}enewsshopdd
                             <p>总额：￥{{ item.totalprice }}</p>
                             <p>(含运费:￥{{ item.youfei }})</p>
                         </td>
+                        {{#  if(item.type== 0){ }}
+                        <!--type == 0,买家未付款,订单正常-->
+                        <!--第五列：订单状态-->
+                        <td class="order-body-item order-status order-statu " rowspan="{{item.products.length}}">
+                            <!--<p>{{ item.type }}</p>-->
+                            <p>未付款</p>
+                            <p><a class="look-order-detaill" href="/e/ShopSys/ShowDd/index.php?ddid={{item.ddid}}">订单详情</a></p>
+                        </td>
+                        <!--第六列，订单操作-->
+                        <td class="order-body-item order-Btn " rowspan="{{item.products.length}}">
+                            <a href="/e/extend/shopdd/zfb/alipayapi.php?ddno={{item.ddid}}" class="go-pay-order order-com-button go-send" target="_blank">去付款</a>
+                            <p onclick="closedd({{item.ddid}})" class="go-pay-order order-com-button go-send">取消订单</p>
+                        </td>
+                        {{#  }else if(item.type== 1){ }}
+                        <!--type == 1,买家未付款,订单已取消-->
+                        <!--第五列：订单状态-->
+                        <td class="order-body-item order-status order-statu " rowspan="{{item.products.length}}">
+                            <!--<p>{{ item.type }}</p>-->
+                            <p>订单已取消</p>
+                            <p><a class="look-order-detaill" href="/e/ShopSys/ShowDd/index.php?ddid={{item.ddid}}">订单详情</a></p>
+                        </td>
+                        <!--第六列，订单操作-->
+                        <td class="order-body-item order-Btn " rowspan="{{item.products.length}}">
+                            <p class="go-pay-order order-com-button go-send">已取消</p>
+                        </td>
+                        {{#  }else if(item.type== 2){ }}
+                        <!--type == 2,等待确认收货-->
+                        <!--第五列：订单状态-->
+                        <td class="order-body-item order-status order-statu " rowspan="{{item.products.length}}">
+                            <!--<p>{{ item.type }}</p>-->
+                            <p>已发货</p>
+                            <p><a class="look-order-detaill" href="/e/ShopSys/ShowDd/index.php?ddid={{item.ddid}}">订单详情</a></p>
+                        </td>
+                        <!--第六列，订单操作-->
+                        <td class="order-body-item order-Btn " rowspan="{{item.products.length}}">
+                            <p><a class="look-order-detaill" href="/e/ShopSys/ShowDd/index.php?ddid={{item.ddid}}">查看物流</a></p>
+                            <!--                            <p onclick="confirmGood({{item.ddid}})" class="go-pay-order order-com-button go-send">确认收货</p>-->
+                        </td>
+                        {{#  }else if(item.type== 3){ }}
+                        <!--type == 3,买家已经确认收货-->
+                        <!--第五列：订单状态-->
+                        <td class="order-body-item order-status order-statu " rowspan="{{item.products.length}}">
+                            <p>已完成</p>
+                            <p><a class="look-order-detaill" href="/e/ShopSys/ShowDd/index.php?ddid={{item.ddid}}">订单详情</a></p>
+                        </td>
+                        <!--第六列，订单操作-->
+                        <td class="order-body-item order-Btn " rowspan="{{item.products.length}}">
+                            <!--                            <p onclick="assess({{item.ddid}})" class="go-pay-order order-com-button go-send">评价</p>-->
+                            <!--                            <p onclick="refund({{item.ddid}})" class="go-pay-order order-com-button go-send">申请退款</p>-->
+                        </td>
+                        {{#  }else if(item.type== 4){ }}
+                        <!--type == 4,已经申请退款,等待卖家确认-->
+                        <!--第五列：订单状态-->
+                        <td class="order-body-item order-status order-statu " rowspan="{{item.products.length}}">
+                            <p>买家申请退款</p>
+                            <p><a class="look-order-detaill" href="/e/ShopSys/ShowDd/index.php?ddid={{item.ddid}}">订单详情</a></p>
+                        </td>
+                        <!--第六列，订单操作-->
+                        <td class="order-body-item order-Btn " rowspan="{{item.products.length}}">
+                            <p onclick="agreeRefund({{item.ddid}})" class="go-pay-order order-com-button go-send">同意退款</p>
+                            <p onclick="refuseRefund({{item.ddid}})" class="go-pay-order order-com-button go-send">拒绝退款</p>
+                        </td>
+                        {{#  }else if(item.type==5){ }}
+                        <!--type == 5,已经拒绝退款-->
+                        <!--第五列：订单状态-->
+                        <td class="order-body-item order-status order-statu " rowspan="{{item.products.length}}">
+                            <p>已拒绝退款</p>
+                            <p><a class="look-order-detaill" href="/e/ShopSys/ShowDd/index.php?ddid={{item.ddid}}">订单详情</a></p>
+                        </td>
+                        <!--第六列，订单操作-->
+                        <td class="order-body-item order-Btn " rowspan="{{item.products.length}}">
+                            <!--                            <a  class="go-pay-order order-com-button-gray go-send">卖家拒绝退款</a>-->
+                            <!--                            <p onclick="rengongkefu({{item.ddid}})" class="go-pay-order order-com-button go-send">申请人工介入</p>-->
+                        </td>
+                        {{#  }else if(item.type==6){ }}
+                        <!--type == 6,申请售后-->
+                        <!--第五列：订单状态-->
+                        <td class="order-body-item order-status order-statu " rowspan="{{item.products.length}}">
+                            <p>买家申请售后</p>
+                            <p><a class="look-order-detaill" href="/e/ShopSys/ShowDd/index.php?ddid={{item.ddid}}">订单详情</a></p>
+                        </td>
+                        <!--第六列，订单操作-->
+                        <td class="order-body-item order-Btn " rowspan="{{item.products.length}}">
+                            <p onclick="agreeRefund({{item.ddid}})" class="go-pay-order order-com-button go-send">同意售后</p>
+                        </td>
+                        {{#  }else if(item.type==7){ }}
+                        <!--type == 5,已经申请退款（已付款，未发货）-->
+
                         <!--第五列：订单状态-->
                         <td class="order-body-item order-status order-statu " rowspan="{{item.products.length}}">
                             <!--<p>{{ item.type }}</p>-->
@@ -94,35 +182,9 @@ $ywcnum = $empire->gettotal("select count(*) as total from {$dbtbpre}enewsshopdd
                         </td>
                         <!--第六列，订单操作-->
                         <td class="order-body-item order-Btn " rowspan="{{item.products.length}}">
-                            {{#  if(item.type== 0){ }}
-                                <!--type == 0,未付款-->
-                                <a href="" class="go-pay-order order-com-button go-send">去付款</a>
-                            {{#  }else if(item.type== 1){ }}
-                                <!--type == 1,已取消订单-->
-                                <p class="go-pay-order order-com-button go-send">已取消</p>
-                            {{#  }else if(item.type== 2){ }}
-                                <!--type == 2,等待确认收货-->
-                                <p onclick="confirmGood({{item.ddid}})" class="go-pay-order order-com-button go-send">确认收货</p>
-                            {{#  }else if(item.type== 3){ }}
-                                <!--type == 3,已经确认收货-->
-                                <p onclick="assess({{item.ddid}})" class="go-pay-order order-com-button go-send">评价</p>
-                                <p onclick="refund({{item.ddid}})" class="go-pay-order order-com-button go-send">申请退款</p>
-                            {{#  }else if(item.type== 4){ }}
-                                <!--type == 4,已经申请退款(未确认)-->
-                                <a  class="go-pay-order order-com-button-gray go-send">已申请退款</a>
-                            {{#  }else if(item.type==5){ }}
-                                <!--type == 5,已经拒绝退款-->
-                                <a  class="go-pay-order order-com-button-gray go-send">卖家拒绝退款</a>
-                                <p onclick="rengongkefu({{item.ddid}})" class="go-pay-order order-com-button go-send">申请人工介入</p>
-                            {{#  }else if(item.type==6){ }}
-                                <!--type == 6,申请身后-->
-                            {{#  }else if(item.type==7){ }}
-                                <!--type == 5,已经申请退款（已付款，未发货）-->
-                                <a  class="go-pay-order order-com-button-gray go-send">已申请退款</a>
-                            {{#  } }}
-                            <!--<p onclick="confirmGood({{item.ddid}})" class="go-pay-order order-com-button go-send">确认收货</p>-->
-                            <!--<p onclick="assess({{item.ddid}})" class="go-pay-order order-com-button go-send">评价</p>-->
+                            <p onclick="deliverGoods({{item.ddid}})" class="go-pay-order order-com-button go-send">发货</p>
                         </td>
+                        {{#  } }}
                     </tr>
                     {{#  }else{ }}
                     <!--如果当前渲染的是产品的第二个已上，只要url，title,titlepic,num.price-->

@@ -1,5 +1,5 @@
 /*!
- * 用于个人中心订单管理
+ * 用于个人中心-卖家订单-管理
  * Created by Freed on 2017/5/15.
  * E-mail:flyxz@126.com.
  * GitHub:FreedGo@github.com.
@@ -17,7 +17,7 @@ layui.use(['layer', 'element', 'flow', 'laytpl','laypage'], function () {
 		url:"/e/extend/shopdd/index.php",
 		type:'get',
 		data:{
-			buyType:'buy_order'
+			buyType:'sell_order'
 		},
 		dataType:'json'
 	}).done(function (msg) {
@@ -441,48 +441,6 @@ function rengongkefu(id) {
 	});
 }
 
-function closedd(id){
-    if (id == ''){
-        return
-    }
-    var confirmIndex= layer.confirm('确认取消订单吗？', {
-        btn: ['确认','取消'] //按钮
-    }, function(){
-        // 调用确认弹窗
-        var proIndex=layer.prompt(
-            {title: '输入取消订单理由', formType: 2},
-            function(text, index){
-                // loading动画
-                var load = layer.load(2, {
-                    shade: [0.2,'#000'] //0.1透明度的黑色背景
-                });
-                // 向后台传递mima确认正确与否
-                $.ajax({
-                    url:'',
-                    type:'post',
-                    data:{
-                        ddid:id,
-						content:text
-                    },
-                    dataType:'text'
-                }).done(function (msg) {
-                    //一旦ajax数据返回成功，不论失败与否，关闭动画
-                    layer.close(load);
-                    if(msg==1){
-                        // 关闭confirm
-                        layer.close(index);
-                        //提示结果
-                        layer.alert('申请取消订单成功');
-                    }else{
-                        //提示结果
-                        layer.alert('申请取消订单失败');
-                    }
-                }).error(function (e) {
-                    layer.close(load);
-                    layer.alert('网络错误');
-                })
-            });
-    }, function(){
-        layer.close(confirmIndex);
-    });
-}
+function agreeRefund(id){}
+
+function refuseRefund(id){}
