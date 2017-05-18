@@ -13,8 +13,11 @@ layui.use(['layer', 'element', 'flow', 'laytpl','laypage'], function () {
 
 });
 function getWuliu(kdid) {
+        var load = load = layer.load(2, {
+            shade: [0.2,'#000'] //0.1透明度的黑色背景
+        });
         if (kdid !=''&&/\d/g.test(parseInt(kdid))) {
-            $('.wuliu-msg-warp').show();
+
             var companyCode;//快递公司代码
             var expTrace;//即时物流信息
             companyCode = getCompanyCode(kdid);
@@ -27,11 +30,16 @@ function getWuliu(kdid) {
                         '</p><p class="msg-time">' + val.AcceptTime +
                         '</p></div>')
                 })
+	            $('.wuliu-msg-warp').show();
+	            layer.close(load);
             } else {
-                $('.wuliu-msg-show').html('<div class="msg-item"><p class="msg-dec">查询失败</p></div>')
+	            layer.close(load);
+	            $('.wuliu-msg-show').html('<div class="msg-item"><p class="msg-dec">查询失败</p></div>')
             }
         } else {
-            $('.wuliu-msg-warp').show();
+	        layer.close(load);
+
+	        $('.wuliu-msg-warp').show();
             $('.wuliu-msg-show').html('<div class="msg-item"><p class="msg-dec">暂无物流信息</p></div>')
         }
 }

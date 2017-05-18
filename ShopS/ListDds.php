@@ -94,7 +94,7 @@ $ywcnum=$empire->gettotal("select count(*) as total from {$dbtbpre}enewsshopdd w
                         <td class="order-body-item order-status order-statu " rowspan="{{item.products.length}}">
                             <!--<p>{{ item.type }}</p>-->
                             <p>未付款</p>
-                            <p><a class="look-order-detaill" href="/e/ShopSys/ShowDd/index.php?ddid={{item.ddid}}">订单详情</a></p>
+                            <p><a class="look-order-detaill" href="/e/ShopS/ShowDd/index.php?ddid={{item.ddid}}">订单详情</a></p>
                         </td>
                         <!--第六列，订单操作-->
                         <td class="order-body-item order-Btn " rowspan="{{item.products.length}}">
@@ -106,7 +106,7 @@ $ywcnum=$empire->gettotal("select count(*) as total from {$dbtbpre}enewsshopdd w
                         <td class="order-body-item order-status order-statu " rowspan="{{item.products.length}}">
                             <!--<p>{{ item.type }}</p>-->
                             <p>订单已取消</p>
-                            <p><a class="look-order-detaill" href="/e/ShopSys/ShowDd/index.php?ddid={{item.ddid}}">订单详情</a></p>
+                            <p><a class="look-order-detaill" href="/e/ShopS/ShowDd/index.php?ddid={{item.ddid}}">订单详情</a></p>
                         </td>
                         <!--第六列，订单操作-->
                         <td class="order-body-item order-Btn " rowspan="{{item.products.length}}">
@@ -118,11 +118,11 @@ $ywcnum=$empire->gettotal("select count(*) as total from {$dbtbpre}enewsshopdd w
                         <td class="order-body-item order-status order-statu " rowspan="{{item.products.length}}">
                             <!--<p>{{ item.type }}</p>-->
                             <p>已发货</p>
-                            <p><a class="look-order-detaill" href="/e/ShopSys/ShowDd/index.php?ddid={{item.ddid}}">订单详情</a></p>
+                            <p><a class="look-order-detaill" href="/e/ShopS/ShowDd/index.php?ddid={{item.ddid}}">订单详情</a></p>
                         </td>
                         <!--第六列，订单操作-->
                         <td class="order-body-item order-Btn " rowspan="{{item.products.length}}">
-                            <p><a class="look-order-detaill" href="/e/ShopSys/ShowDd/index.php?ddid={{item.ddid}}">查看物流</a></p>
+                            <p><a class="look-order-detaill" href="/e/ShopS/ShowDd/index.php?ddid={{item.ddid}}">查看物流</a></p>
 <!--                            <p onclick="confirmGood({{item.ddid}})" class="go-pay-order order-com-button go-send">确认收货</p>-->
                         </td>
                     {{#  }else if(item.type== 3){ }}
@@ -130,7 +130,7 @@ $ywcnum=$empire->gettotal("select count(*) as total from {$dbtbpre}enewsshopdd w
                         <!--第五列：订单状态-->
                         <td class="order-body-item order-status order-statu " rowspan="{{item.products.length}}">
                             <p>已完成</p>
-                            <p><a class="look-order-detaill" href="/e/ShopSys/ShowDd/index.php?ddid={{item.ddid}}">订单详情</a></p>
+                            <p><a class="look-order-detaill" href="/e/ShopS/ShowDd/index.php?ddid={{item.ddid}}">订单详情</a></p>
                         </td>
                         <!--第六列，订单操作-->
                         <td class="order-body-item order-Btn " rowspan="{{item.products.length}}">
@@ -142,7 +142,7 @@ $ywcnum=$empire->gettotal("select count(*) as total from {$dbtbpre}enewsshopdd w
                         <!--第五列：订单状态-->
                         <td class="order-body-item order-status order-statu " rowspan="{{item.products.length}}">
                             <p>买家申请退款</p>
-                            <p><a class="look-order-detaill" href="/e/ShopSys/ShowDd/index.php?ddid={{item.ddid}}">订单详情</a></p>
+                            <p><a class="look-order-detaill" href="/e/ShopS/ShowDd/index.php?ddid={{item.ddid}}">订单详情</a></p>
                         </td>
                         <!--第六列，订单操作-->
                         <td class="order-body-item order-Btn " rowspan="{{item.products.length}}">
@@ -154,7 +154,7 @@ $ywcnum=$empire->gettotal("select count(*) as total from {$dbtbpre}enewsshopdd w
                         <!--第五列：订单状态-->
                         <td class="order-body-item order-status order-statu " rowspan="{{item.products.length}}">
                             <p>已拒绝退款</p>
-                            <p><a class="look-order-detaill" href="/e/ShopSys/ShowDd/index.php?ddid={{item.ddid}}">订单详情</a></p>
+                            <p><a class="look-order-detaill" href="/e/ShopS/ShowDd/index.php?ddid={{item.ddid}}">订单详情</a></p>
                         </td>
                         <!--第六列，订单操作-->
                         <td class="order-body-item order-Btn " rowspan="{{item.products.length}}">
@@ -166,7 +166,7 @@ $ywcnum=$empire->gettotal("select count(*) as total from {$dbtbpre}enewsshopdd w
                         <!--第五列：订单状态-->
                         <td class="order-body-item order-status order-statu " rowspan="{{item.products.length}}">
                             <p>买家申请售后</p>
-                            <p><a class="look-order-detaill" href="/e/ShopSys/ShowDd/index.php?ddid={{item.ddid}}">订单详情</a></p>
+                            <p><a class="look-order-detaill" href="/e/ShopS/ShowDd/index.php?ddid={{item.ddid}}">订单详情</a></p>
                         </td>
                         <!--第六列，订单操作-->
                         <td class="order-body-item order-Btn " rowspan="{{item.products.length}}">
@@ -178,12 +178,24 @@ $ywcnum=$empire->gettotal("select count(*) as total from {$dbtbpre}enewsshopdd w
                         <!--第五列：订单状态-->
                         <td class="order-body-item order-status order-statu " rowspan="{{item.products.length}}">
                             <!--<p>{{ item.type }}</p>-->
-                            <p><a class="look-order-detaill" href="/e/ShopSys/ShowDd/index.php?ddid={{item.ddid}}">订单详情</a></p>
+                            <p><a class="look-order-detaill" href="/e/ShopS/ShowDd/index.php?ddid={{item.ddid}}">订单详情</a></p>
                         </td>
                     <!--第六列，订单操作-->
                         <td class="order-body-item order-Btn " rowspan="{{item.products.length}}">
                             <p onclick="deliverGoods({{item.ddid}})" class="go-pay-order order-com-button go-send">发货</p>
                         </td>
+	                {{#  }else if(item.type==8){ }}
+		                <!--type == 8,已付款，未发货-->
+
+		                <!--第五列：订单状态-->
+		                <td class="order-body-item order-status order-statu " rowspan="{{item.products.length}}">
+			                <p>已付款</p>
+			                <p><a class="look-order-detaill" href="/e/ShopS/ShowDd/index.php?ddid={{item.ddid}}">订单详情</a></p>
+		                </td>
+		                <!--第六列，订单操作-->
+		                <td class="order-body-item order-Btn " rowspan="{{item.products.length}}">
+			                <p onclick="deliverGoods({{item.ddid}})" class="go-pay-order order-com-button go-send">发货</p>
+		                </td>
                     {{#  } }}
                 </tr>
                 {{#  }else{ }}
@@ -400,6 +412,27 @@ $ywcnum=$empire->gettotal("select count(*) as total from {$dbtbpre}enewsshopdd w
 
     </div>
     <div class="clearfix"></div>
+	<div class="fahuo" id="fahuo" style="width:400px;">
+		<form action="" class="layui-form">
+			<div class="layui-form-item">
+				<label class="layui-form-label">快递单号：</label>
+				<div class="layui-input-block">
+					<input type="text" name="psddno" lay-verify="number" placeholder="请输入" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">快递公司：</label>
+				<div class="layui-input-block">
+					<input type="text" name="psname" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<div class="layui-input-block">
+					<button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+				</div>
+			</div>
+		</form>
+	</div>
   </div>
 </div>
 <?php

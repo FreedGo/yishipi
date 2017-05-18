@@ -88,11 +88,11 @@ $ywcnum = $empire->gettotal("select count(*) as total from {$dbtbpre}enewsshopdd
                             <p>(含运费:￥{{ item.youfei }})</p>
                         </td>
                         {{#  if(item.type== 0){ }}
-                        <!--type == 0,买家未付款,订单正常-->
+                        <!--type == 0,买家未支付,订单正常-->
                         <!--第五列：订单状态-->
                         <td class="order-body-item order-status order-statu " rowspan="{{item.products.length}}">
                             <!--<p>{{ item.type }}</p>-->
-                            <p>未付款</p>
+                            <p>未支付</p>
                             <p><a class="look-order-detaill" href="/e/ShopSys/ShowDd/index.php?ddid={{item.ddid}}">订单详情</a></p>
                         </td>
                         <!--第六列，订单操作-->
@@ -101,7 +101,7 @@ $ywcnum = $empire->gettotal("select count(*) as total from {$dbtbpre}enewsshopdd
                             <p onclick="closedd({{item.ddid}})" class="go-pay-order order-com-button go-send">取消订单</p>
                         </td>
                         {{#  }else if(item.type== 1){ }}
-                        <!--type == 1,买家未付款,订单已取消-->
+                        <!--type == 1,买家未支付,订单已取消-->
                         <!--第五列：订单状态-->
                         <td class="order-body-item order-status order-statu " rowspan="{{item.products.length}}">
                             <!--<p>{{ item.type }}</p>-->
@@ -118,12 +118,13 @@ $ywcnum = $empire->gettotal("select count(*) as total from {$dbtbpre}enewsshopdd
                         <td class="order-body-item order-status order-statu " rowspan="{{item.products.length}}">
                             <!--<p>{{ item.type }}</p>-->
                             <p>已发货</p>
-                            <p><a class="look-order-detaill" href="/e/ShopSys/ShowDd/index.php?ddid={{item.ddid}}">订单详情</a></p>
+	                        <!--<p><a class="look-order-detaill" href="/e/ShopSys/ShowDd/index.php?ddid={{item.ddid}}">查看物流</a></p>-->
+	                        <p><a class="look-order-detaill" href="/e/ShopSys/ShowDd/index.php?ddid={{item.ddid}}">订单详情</a></p>
                         </td>
                         <!--第六列，订单操作-->
                         <td class="order-body-item order-Btn " rowspan="{{item.products.length}}">
-                            <p><a class="look-order-detaill" href="/e/ShopSys/ShowDd/index.php?ddid={{item.ddid}}">查看物流</a></p>
-                            <!--                            <p onclick="confirmGood({{item.ddid}})" class="go-pay-order order-com-button go-send">确认收货</p>-->
+	                        <p onclick="confirmGood({{item.ddid}})" class="go-pay-order order-com-button go-send">确认收货</p>
+                            <!-- <p onclick="confirmGood({{item.ddid}})" class="go-pay-order order-com-button go-send">确认收货</p>-->
                         </td>
                         {{#  }else if(item.type== 3){ }}
                         <!--type == 3,买家已经确认收货-->
@@ -134,8 +135,8 @@ $ywcnum = $empire->gettotal("select count(*) as total from {$dbtbpre}enewsshopdd
                         </td>
                         <!--第六列，订单操作-->
                         <td class="order-body-item order-Btn " rowspan="{{item.products.length}}">
-                            <!--                            <p onclick="assess({{item.ddid}})" class="go-pay-order order-com-button go-send">评价</p>-->
-                            <!--                            <p onclick="refund({{item.ddid}})" class="go-pay-order order-com-button go-send">申请退款</p>-->
+	                        <p><a class="order-com-button" href="/e/ecmsshop/mycomments">评价</a></p>
+	                        <p onclick="refund({{item.ddid}})" class="go-pay-order order-com-button go-send">申请退款</p>
                         </td>
                         {{#  }else if(item.type== 4){ }}
                         <!--type == 4,已经申请退款,等待卖家确认-->
@@ -173,17 +174,29 @@ $ywcnum = $empire->gettotal("select count(*) as total from {$dbtbpre}enewsshopdd
                             <p onclick="agreeRefund({{item.ddid}})" class="go-pay-order order-com-button go-send">同意售后</p>
                         </td>
                         {{#  }else if(item.type==7){ }}
-                        <!--type == 5,已经申请退款（已付款，未发货）-->
+                        <!--type == 7,申请退款（已付款，未发货）-->
 
                         <!--第五列：订单状态-->
                         <td class="order-body-item order-status order-statu " rowspan="{{item.products.length}}">
-                            <!--<p>{{ item.type }}</p>-->
+                            <p>已申请退款</p>
                             <p><a class="look-order-detaill" href="/e/ShopSys/ShowDd/index.php?ddid={{item.ddid}}">订单详情</a></p>
                         </td>
                         <!--第六列，订单操作-->
                         <td class="order-body-item order-Btn " rowspan="{{item.products.length}}">
-                            <p onclick="deliverGoods({{item.ddid}})" class="go-pay-order order-com-button go-send">发货</p>
+                            <p onclick="refund({{item.ddid}})" class="go-pay-order order-com-button go-send">申请退款</p>
                         </td>
+	                    {{#  }else if(item.type==8){ }}
+	                    <!--type == 8,已付款，未发货-->
+
+		                    <!--第五列：订单状态-->
+		                    <td class="order-body-item order-status order-statu " rowspan="{{item.products.length}}">
+			                    <p>待发货</p>
+			                    <p><a class="look-order-detaill" href="/e/ShopSys/ShowDd/index.php?ddid={{item.ddid}}">订单详情</a></p>
+		                    </td>
+		                    <!--第六列，订单操作-->
+		                    <td class="order-body-item order-Btn " rowspan="{{item.products.length}}">
+			                    <p onclick="refund({{item.ddid}})" class="go-pay-order order-com-button go-send">申请退款</p>
+		                    </td>
                         {{#  } }}
                     </tr>
                     {{#  }else{ }}
@@ -269,7 +282,7 @@ $ywcnum = $empire->gettotal("select count(*) as total from {$dbtbpre}enewsshopdd
                             <div class="pages0"></div>
                             <!--分页-->
                         </div>
-						<!--未付款-->
+						<!--未支付-->
 						<div class="layui-tab-item">
                             <!--列表头部的标题-->
                             <table class="layui-table " lay-skin="nob">

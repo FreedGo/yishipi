@@ -83,7 +83,7 @@ layui.use(['layer', 'element', 'flow', 'laytpl','laypage'], function () {
 			"list":allOrders.status3
 		};
 		var data4 = {
-			"list":allOrders.status3
+			"list":allOrders.status4
 		};
 
 		// 渲染全部订单d
@@ -214,7 +214,7 @@ function getListPage(index,nums) {
     })
 }
 /**
- * 确认收货
+ * 确认收货,ok
  * @param id{String}:订单id
  */
 function confirmGood(id) {
@@ -234,10 +234,12 @@ function confirmGood(id) {
 					});
 					// 向后台传递mima确认正确与否
 					$.ajax({
-						url:'',
-						type:'post',
+						url:'/e/extend/shopdd/index.php',
+						type:'get',
 						data:{
-							ddid:id
+							buyType:'sign',
+							ddno:id,
+							password:pass
 						},
 						dataType:'text'
 					}).done(function (msg) {
@@ -295,54 +297,7 @@ function assess(id) {
 		})
 	});
 }
-/**
- * 确认收货
- * @param id{String}:订单id
- */
-function confirmGood(id) {
-	if (id == ''){
-		return
-	}
-	var confirmIndex= layer.confirm('确认收货吗？确认收货将会把货款转入卖家账户。', {
-		btn: ['确认','取消'] //按钮
-	}, function(){
-		// 调用确认弹窗
-		var proIndex=layer.prompt(
-			{title: '输入登录密码，并确认', formType: 1},
-			function(pass, index){
-				// loading动画
-				var load = layer.load(2, {
-					shade: [0.2,'#000'] //0.1透明度的黑色背景
-				});
-				// 向后台传递mima确认正确与否
-				$.ajax({
-					url:'',
-					type:'post',
-					data:{
-						ddid:id
-					},
-					dataType:'text'
-				}).done(function (msg) {
-					//一旦ajax数据返回成功，不论失败与否，关闭动画
-					layer.close(load);
-					if(msg==1){
-						// 关闭confirm
-						layer.close(index);
-						//提示结果
-						layer.alert('确认收货成功');
-					}else{
-						//提示结果
-						layer.alert('密码错误');
-					}
-				}).error(function (e) {
-					layer.close(load);
-					layer.alert('网络错误');
-				})
-			});
-	}, function(){
-		layer.close(confirmIndex);
-	});
-}
+
 /**
  * 申请退款
  * @param id
@@ -458,11 +413,12 @@ function closedd(id){
                 });
                 // 向后台传递mima确认正确与否
                 $.ajax({
-                    url:'',
-                    type:'post',
+                    url:'/e/extend/shopdd/index.php',
+                    type:'get',
                     data:{
                         ddid:id,
-						content:text
+	                    buyType:'sign',
+	                    content:text
                     },
                     dataType:'text'
                 }).done(function (msg) {
@@ -486,3 +442,5 @@ function closedd(id){
         layer.close(confirmIndex);
     });
 }
+
+

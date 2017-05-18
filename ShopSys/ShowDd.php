@@ -149,24 +149,25 @@ require(ECMS_PATH . 'e/template/incfile/header.php');
                         <tr>
                             <td width="15%" height="25">发货状态:</td>
                             <td width="35%">
-                                <?= $r[truename] ?>
+	                            <?= $ou ?>
                             </td>
                             <td width="15%">物流公司:</td>
-                            <td width="35%"><?= $r[phone] ?></td>
+                            <td width="35%"><?= $r[psname] ?></td>
                         </tr>
                         <tr>
                             <td>物流单号:</td>
-                            <td><?= $r[email] ?></td>
+                            <td><?= $r[psddno] ?></td>
                             <td >发货时间:</td>
-                            <td><?= $r[address] ?></td>
+                            <td><?= $r[pstime] ?></td>
                         </tr>
                     </table>
                     <div class="detaill-msg-mon">
                         <span class="detaill-msg-mon-name ">物流跟踪:</span>
                         <span class="detaill-msg-mon-val ">
                             <!--在js内部插入订单号-->
-                            <!--<a onclick="getWuliu('<?= $r[wuliudanhao] ?>')" class="get-wuliu-msg">点击查询</a>-->
-                            <a onclick="getWuliu(421410773991)" class="get-wuliu-msg">点击查询</a>
+	                        <?// print_r($r)?>
+                            <a onclick="getWuliu('<?= $r[psddno] ?>')" class="get-wuliu-msg">点击查询</a>
+                            <!--<a onclick="getWuliu(421410773991)" class="get-wuliu-msg">点击查询</a>-->
                         </span>
                     </div>
                     <div class="wuliu-msg-warp">

@@ -5,12 +5,13 @@
  * GitHub:FreedGo@github.com.
  */
 // 主入口，引入需要使用的模块并初始化
-layui.use(['layer', 'element', 'flow', 'laytpl','laypage'], function () {
+layui.use(['layer', 'element', 'flow', 'laytpl','laypage','form'], function () {
 
 	var layer   = layui.layer,     //弹出层
 	    element = layui.element(), //元素操作
 	    laytpl  = layui.laytpl,    //前端模板
 	    flow    = layui.flow,      //流加载
+	    form    = layui.form,
 	    laypage = layui.laypage;   //分页加载
 
 	$.ajax({
@@ -444,3 +445,84 @@ function rengongkefu(id) {
 function agreeRefund(id){}
 
 function refuseRefund(id){}
+/**
+ * 发货
+ * @param id{String}:订单id
+ */
+function deliverGoods(id) {
+	if (id == ''){
+		return
+	}
+	var deliverIndex=layer.open({
+		type: 1,
+		title:'填写发货信息',
+		skin: 'layui-layer-rim', //加上边框
+		area: ['420px'], //宽高
+		closeBtn: 1, //不显示关闭按钮
+		anim: 2,
+		shadeClose: true, //开启遮罩关闭
+		content: $('#fahuo')
+	});
+	layui.use(['form'], function(){
+			var form = layui.form();
+		form.on('submit(demo1)', function(data){
+			// loading动画
+			var load = layer.load(2, {
+				shade: [0.2,'#000'] //0.1透明度的黑色背景
+			});
+			$.ajax({
+				url:'/e/extend/shopdd/index.php',
+				type:'get',
+				data:{
+					buyType:'sell_deliver',
+					ddno:id,
+					psname:data.field.psname,//物流名称
+					psddno:data.field.psddno//快递单号
+				},
+				dataType:'text'
+			}).done(function (msg) {
+				layer.close(load);
+				if(msg==1){
+					layer.close(deliverIndex);
+					layer.alert('发货成功');
+				}else{
+					layer.alert('发货失败');
+					window.location.reload();
+				}
+			}).error(function (e) {
+				layer.close(load);
+				layer.alert('网络错误');
+				// layer.close(deliverIndex);
+			});
+			return false;
+		});
+
+	});
+	//监听提交
+	// layer.prompt({title: '请填写快递单号', formType: 0}, function(text, index){
+	// 	console.log(text);
+	// 	var load = layer.load(2, {
+	// 		shade: [0.2,'#000'] //0.1透明度的白色背景
+	// 	});
+	// 	$.ajax({
+	// 		url:'',
+	// 		type:'post',
+	// 		data:{
+	// 			ddid:id,
+	// 			content:text
+	// 		},
+	// 		dataType:'text'
+	// 	}).done(function (msg) {
+	// 		layer.close(load);
+	// 		if(msg==1){
+	// 			layer.close(index);
+	// 			layer.alert('发货成功');
+	// 		}else{
+	// 			layer.alert('发货失败');
+	// 		}
+	// 	}).error(function (e) {
+	// 		layer.alert('网络错误');
+	// 		layer.close(load);
+	// 	})
+	// });
+}
