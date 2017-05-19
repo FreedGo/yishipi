@@ -84,7 +84,7 @@ layui.use(['layer', 'element', 'flow', 'laytpl','laypage','form'], function () {
 			"list":allOrders.status3
 		};
 		var data4 = {
-			"list":allOrders.status3
+			"list":allOrders.status4
 		};
 
 		// 渲染全部订单d

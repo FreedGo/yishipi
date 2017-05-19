@@ -396,6 +396,10 @@ function rengongkefu(id) {
 	});
 }
 
+/**
+ * 关闭订单
+ * @param id
+ */
 function closedd(id){
     if (id == ''){
         return
@@ -416,8 +420,8 @@ function closedd(id){
                     url:'/e/extend/shopdd/index.php',
                     type:'get',
                     data:{
-                        ddid:id,
-	                    buyType:'sign',
+                        ddno:id,
+	                    buyType:'close',
 	                    content:text
                     },
                     dataType:'text'

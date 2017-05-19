@@ -110,7 +110,7 @@ $ywcnum = $empire->gettotal("select count(*) as total from {$dbtbpre}enewsshopdd
                         </td>
                         <!--第六列，订单操作-->
                         <td class="order-body-item order-Btn " rowspan="{{item.products.length}}">
-                            <p class="go-pay-order order-com-button go-send">已取消</p>
+                            <p class="go-pay-order order-com-button-gray go-send">已取消</p>
                         </td>
                         {{#  }else if(item.type== 2){ }}
                         <!--type == 2,等待确认收货-->
