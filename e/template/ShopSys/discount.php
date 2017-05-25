@@ -49,9 +49,9 @@ require(ECMS_PATH . 'e/template/incfile/header.php');
 					<table class="layui-table">
 						<thead>
 						<tr>
-							<th class="w1" style="white-space:nowrap;overflow:hidden;word-break:break-all;">方案名称</th>
-							<th class="left" style="white-space:nowrap;overflow:hidden;word-break:break-all;">方案内容</th>
-							<th class="w6" style="white-space:nowrap;overflow:hidden;word-break:break-all;">添加时间</th>
+							<th class="w1" >方案名称</th>
+							<th class="left" >方案内容</th>
+							<th class="w6">添加时间</th>
 							<th class="w1">操作</th>
 						</tr>
 						</thead>
@@ -102,7 +102,6 @@ require(ECMS_PATH . 'e/template/incfile/header.php');
 				</div>
 				<div class="yuer f14 pl20 bold"><span class="csh">添加方案</span></div>
 				<div id="edituserxx">
-
 					<form class="layui-form" action="../doaction.php" method="post" name="addform" id="addform">
 						<input name="enews" type="hidden" id="enews" value="AddAddress">
 						<input name="addressid" type="hidden" id="addressid" value="0">
@@ -169,54 +168,6 @@ require(ECMS_PATH . 'e/template/incfile/header.php');
 								</div>
 							</div>
 						</div>
-
-
-						<!--<table width="100%" border="0" align="center" cellpadding="3" cellspacing="1" class="tableborder">-->
-							<!--<tbody>-->
-							<!--<tr bgcolor="#FFFFFF">-->
-							<!--	<td width="22%" height="25">方案名称：</td>-->
-							<!--	<td width="78%" height="25">-->
-							<!--		<input name="addressname" type="text" id="title2" value="" placeholder="例如: 家里地址"><span class="csh">*</span>-->
-							<!--	</td>-->
-							<!--</tr>-->
-							<!--<tr bgcolor="#FFFFFF">-->
-							<!--	<td height="25">方案类型：</td>-->
-							<!--	<td height="25">-->
-							<!--		<input name="truename" type="text" id="addressname" value="" size="42"><span class="csh">*</span>-->
-							<!--	</td>-->
-							<!--</tr>-->
-							<!--<tr bgcolor="#FFFFFF">
-							  <td height="25">地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;区：</td>
-							  <td height="25" style="padding-left:9px;">
-							  <div id="city">
-							  <select class="prov"></select>
-								<select class="city" disabled="disabled"></select>
-								<select class="dist" disabled="disabled"></select>
-							  </div>
-							</td>
-							</tr>-->
-							<!--<tr bgcolor="#FFFFFF">-->
-							<!--	<td width="22%" height="25">详细地址：</td>-->
-							<!--	<td width="78%" height="25">-->
-							<!--		<input name="address" type="text" id="title2" value="" size="60"><span class="csh">*</span>-->
-							<!--	</td>-->
-							<!--</tr>-->
-							<!--<tr bgcolor="#FFFFFF">-->
-							<!--	<td height="25">电子邮箱：</td>-->
-							<!--	<td height="25"><input name="email" type="text" id="truename" value="" size="42"></td>-->
-							<!--</tr>-->
-							<!--<tr bgcolor="#FFFFFF">-->
-							<!--	<td height="25">联系电话：</td>-->
-							<!--	<td height="25">-->
-							<!--		<input name="phone" type="text" id="mycall" value="" size="42"><span class="csh">*</span>-->
-							<!--	</td>-->
-							<!--</tr>-->
-							<!--<tr bgcolor="#FFFFFF">-->
-							<!--	<td height="25">邮编：</td>-->
-							<!--	<td height="25"><input name="zip" type="text" id="address" value="" size="42"></td>-->
-							<!--</tr>-->
-						<!--	</tbody>-->
-						<!--</table>-->
 						<div class="pl78"><input type="submit" name="Submit" value="确认无误，添加" lay-submit="" lay-filter="demo2" class="layui-btn layui-btn-warm">
 						</div>
 					</form>
