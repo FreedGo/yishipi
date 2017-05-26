@@ -136,89 +136,323 @@ function set_upload_param(up, filename, ret)
 
     up.start();
 }
+$(function () {
+	var ossuploader1 = new plupload.Uploader({
+			runtimes           : 'html5,flash,silverlight,html4',
+			browse_button      : 'selectfiles',
+			//multi_selection: false,
+			flash_swf_url      : 'lib/plupload-2.1.2/js/Moxie.swf',
+			silverlight_xap_url: 'lib/plupload-2.1.2/js/Moxie.xap',
+			url                : 'http://oss.aliyuncs.com',
+			filters            : {
+				mime_types        : [ //只允许上传图片和zip,rar文件
+					{title: "Image files", extensions: "jpg,gif,png,bmp"}
+				],
+				max_file_size     : '2mb', //最大只能上传2mb的文件
+				prevent_duplicates: false //不允许选取重复文件
+			},
+			imageStr:'',
+			init: {
+				PostInit: function () {
+					// 3 .选择文件的按钮 -------------------------------------------------------------------------------------
+					$('#container1').find('#postfiles').click(function () {
+						// 4.此处uploader要改------------------------------------------------
+						set_upload_param(ossuploader1, '', false);
+						return false;
+					});
+				},
+				FilesAdded: function (up, files) {
+					plupload.each(files, function (file) {
+						//5-------------------------------------------------------------------------------------------------
+						$('#container1').find('#ossfile').html('<div id="' + file.id + '"><div class="file"><span class="filename">' + file.name + ' (' + plupload.formatSize(file.size) + ')</span><b></b>'
+							+ '<div class="progress"><div class="progress-bar" style="width: 0%"></div></div>'
+							+ '</div>');
+					});
+				},
+				BeforeUpload: function (up, file) {
+					check_object_radio();
+					set_upload_param(up, file.name, true);
+				},
+				UploadProgress: function (up, file) {
 
-var ossuploader1 = new plupload.Uploader({
-		runtimes           : 'html5,flash,silverlight,html4',
-		browse_button      : 'selectfiles',
-		//multi_selection: false,
-		flash_swf_url      : 'lib/plupload-2.1.2/js/Moxie.swf',
-		silverlight_xap_url: 'lib/plupload-2.1.2/js/Moxie.xap',
-		url                : 'http://oss.aliyuncs.com',
-		filters            : {
-			mime_types        : [ //只允许上传图片和zip,rar文件
-				{title: "Image files", extensions: "jpg,gif,png,bmp"}
-			],
-			max_file_size     : '2mb', //最大只能上传2mb的文件
-			prevent_duplicates: false //不允许选取重复文件
-		},
-		imageStr:'',
-		init: {
-			PostInit: function () {
-				// 3 .选择文件的按钮 -------------------------------------------------------------------------------------
-				$('#container').find('#postfiles').click(function () {
-				// 4.此处uploader要改------------------------------------------------
-					set_upload_param(ossuploader1, '', false);
-					return false;
-				});
-			},
-			FilesAdded: function (up, files) {
-				plupload.each(files, function (file) {
-					//5-------------------------------------------------------------------------------------------------
-					$('#container').find('#ossfile').html('<div id="' + file.id + '"><div class="file"><span class="filename">' + file.name + ' (' + plupload.formatSize(file.size) + ')</span><b></b>'
-						+ '<div class="progress"><div class="progress-bar" style="width: 0%"></div></div>'
-						+ '</div>');
-				});
-			},
-			BeforeUpload: function (up, file) {
-				check_object_radio();
-				set_upload_param(up, file.name, true);
-			},
-			UploadProgress: function (up, file) {
+					//6------------------------------------------------------------------------------------------------------
+					var d                  = $('#container1').find('#' + file.id);
+					d.find('b').eq(0).html = '<span>' + file.percent + "%</span>";
+					var prog               = d.find('.progress').eq(0);
+					var progBar            = prog.find('.progress-bar')[0];
+					progBar.style.width    = 2 * file.percent + 'px';
+					progBar.setAttribute('aria-valuenow', file.percent);
+				},
 
-				//6------------------------------------------------------------------------------------------------------
-				var d                  = $('#container').find('#' + file.id);
-				d.find('b').eq(0).html = '<span>' + file.percent + "%</span>";
-				var prog               = d.find('.progress').eq(0);
-				var progBar            = prog.find('.progress-bar')[0];
-				progBar.style.width    = 2 * file.percent + 'px';
-				progBar.setAttribute('aria-valuenow', file.percent);
-			},
-
-			FileUploaded: function (up, file, info) {
-				if (typeof isSingle == 'undefined') {
-					isSingle = true;
-				}
-				if (info.status == 200) {
-					$('#container').find('#' + file.id).find('b')[0].innerHTML = '上传成功';
-					console.log(host + '/' + get_uploaded_object_name(file.name));
-					if (isSingle) {
-						ossuploader1.imageStr = host + '/' + get_uploaded_object_name(file.name);
-					} else {
-						ossuploader1.imageStr += host + '/' + get_uploaded_object_name(file.name) + '::::::';
+				FileUploaded: function (up, file, info) {
+					if (typeof isSingle == 'undefined') {
+						isSingle = true;
 					}
-					//8-----------------------------------------------------------------------------------
-					$('#imageUrl').val(ossuploader1.imageStr);
-					$('#container').find('.imageShow').attr('src', ossuploader1.imageStr);
-					$('#container').find('.imageWarp').show();
+					if (info.status == 200) {
+						$('#container1').find('#' + file.id).find('b')[0].innerHTML = '上传成功';
+						console.log(host + '/' + get_uploaded_object_name(file.name));
+						if (isSingle) {
+							ossuploader1.imageStr = host + '/' + get_uploaded_object_name(file.name);
+						} else {
+							ossuploader1.imageStr += host + '/' + get_uploaded_object_name(file.name) + '::::::';
+						}
+						//8-----------------------------------------------------------------------------------
+						$('#imageUrl').val(ossuploader1.imageStr);
+						$('#container1').find('.imageShow').attr('src', ossuploader1.imageStr);
+						$('#container1').find('.imageWarp').show();
 
-				}
-				else {
-					alert(info.response);
-					// contain.find('#'+file.id).find('b')[0].innerHTML = info.response;
+					}
+					else {
+						alert(info.response);
+						// contain.find('#'+file.id).find('b')[0].innerHTML = info.response;
+					}
 				}
 			}
 		}
+	);
+
+	ossuploader1.init();
+
+	var ossuploader2 = new plupload.Uploader({
+			runtimes           : 'html5,flash,silverlight,html4',
+			browse_button      : 'selectfiles2',
+			//multi_selection: false,
+			flash_swf_url      : 'lib/plupload-2.1.2/js/Moxie.swf',
+			silverlight_xap_url: 'lib/plupload-2.1.2/js/Moxie.xap',
+			url                : 'http://oss.aliyuncs.com',
+			filters            : {
+				mime_types        : [ //只允许上传图片和zip,rar文件
+					{title: "Image files", extensions: "jpg,gif,png,bmp"}
+				],
+				max_file_size     : '2mb', //最大只能上传2mb的文件
+				prevent_duplicates: false //不允许选取重复文件
+			},
+			imageStr:'',
+			init: {
+				PostInit: function () {
+					// 3 .选择文件的按钮 -------------------------------------------------------------------------------------
+					$('#container2').find('#postfiles2').click(function () {
+						// 4.此处uploader要改------------------------------------------------
+						set_upload_param(ossuploader2, '', false);
+						return false;
+					});
+				},
+				FilesAdded: function (up, files) {
+					plupload.each(files, function (file) {
+						//5-------------------------------------------------------------------------------------------------
+						$('#container2').find('#ossfile').html('<div id="' + file.id + '"><div class="file"><span class="filename">' + file.name + ' (' + plupload.formatSize(file.size) + ')</span><b></b>'
+							+ '<div class="progress"><div class="progress-bar" style="width: 0%"></div></div>'
+							+ '</div>');
+					});
+				},
+				BeforeUpload: function (up, file) {
+					check_object_radio();
+					set_upload_param(up, file.name, true);
+				},
+				UploadProgress: function (up, file) {
+
+					//6------------------------------------------------------------------------------------------------------
+					var d                  = $('#container2').find('#' + file.id);
+					d.find('b').eq(0).html = '<span>' + file.percent + "%</span>";
+					var prog               = d.find('.progress').eq(0);
+					var progBar            = prog.find('.progress-bar')[0];
+					progBar.style.width    = 2 * file.percent + 'px';
+					progBar.setAttribute('aria-valuenow', file.percent);
+				},
+
+				FileUploaded: function (up, file, info) {
+					if (typeof isSingle == 'undefined') {
+						isSingle = true;
+					}
+					if (info.status == 200) {
+						$('#container2').find('#' + file.id).find('b')[0].innerHTML = '上传成功';
+						console.log(host + '/' + get_uploaded_object_name(file.name));
+						if (isSingle) {
+							ossuploader2.imageStr = host + '/' + get_uploaded_object_name(file.name);
+						} else {
+							ossuploader2.imageStr += host + '/' + get_uploaded_object_name(file.name) + '::::::';
+						}
+						//8-----------------------------------------------------------------------------------
+						$('#imageUrl2').val(ossuploader2.imageStr);
+						$('#container2').find('.imageShow').attr('src', ossuploader2.imageStr);
+						$('#container2').find('.imageWarp').show();
+
+					}
+					else {
+						alert(info.response);
+						// contain.find('#'+file.id).find('b')[0].innerHTML = info.response;
+					}
+				}
+			}
+		}
+	);
+
+	ossuploader2.init();
+
+
+    var ossuploader3 = new plupload.Uploader({
+            runtimes           : 'html5,flash,silverlight,html4',
+			//1.-----------------------------------------------------------------------------------------------------
+            browse_button      : 'selectfiles3',
+            //multi_selection: false,
+            flash_swf_url      : 'lib/plupload-2.1.2/js/Moxie.swf',
+            silverlight_xap_url: 'lib/plupload-2.1.2/js/Moxie.xap',
+            url                : 'http://oss.aliyuncs.com',
+            filters            : {
+                mime_types        : [ //只允许上传图片和zip,rar文件
+                    {title: "Image files", extensions: "jpg,gif,png,bmp"}
+                ],
+                max_file_size     : '2mb', //最大只能上传2mb的文件
+                prevent_duplicates: false //不允许选取重复文件
+            },
+            imageStr:'',
+            init: {
+                PostInit: function () {
+                    // 3 .选择文件的按钮 -------------------------------------------------------------------------------------
+                    $('#container3').find('#postfiles3').click(function () {
+                        // 4.此处uploader要改------------------------------------------------
+                        set_upload_param(ossuploader3, '', false);
+                        return false;
+                    });
+                },
+                FilesAdded: function (up, files) {
+                    plupload.each(files, function (file) {
+                        //5-------------------------------------------------------------------------------------------------
+                        $('#container3').find('#ossfile').html('<div id="' + file.id + '"><div class="file"><span class="filename">' + file.name + ' (' + plupload.formatSize(file.size) + ')</span><b></b>'
+                            + '<div class="progress"><div class="progress-bar" style="width: 0%"></div></div>'
+                            + '</div>');
+                    });
+                },
+                BeforeUpload: function (up, file) {
+                    check_object_radio();
+                    set_upload_param(up, file.name, true);
+                },
+                UploadProgress: function (up, file) {
+
+                    //6------------------------------------------------------------------------------------------------------
+                    var d                  = $('#container3').find('#' + file.id);
+                    d.find('b').eq(0).html = '<span>' + file.percent + "%</span>";
+                    var prog               = d.find('.progress').eq(0);
+                    var progBar            = prog.find('.progress-bar')[0];
+                    progBar.style.width    = 2 * file.percent + 'px';
+                    progBar.setAttribute('aria-valuenow', file.percent);
+                },
+
+                FileUploaded: function (up, file, info) {
+                    if (typeof isSingle == 'undefined') {
+                        isSingle = true;
+                    }
+                    if (info.status == 200) {
+                        $('#container3').find('#' + file.id).find('b')[0].innerHTML = '上传成功';
+                        console.log(host + '/' + get_uploaded_object_name(file.name));
+                        if (isSingle) {
+                            ossuploader3.imageStr = host + '/' + get_uploaded_object_name(file.name);
+                        } else {
+                            ossuploader3.imageStr += host + '/' + get_uploaded_object_name(file.name) + '::::::';
+                        }
+                        //8-----------------------------------------------------------------------------------
+                        $('#imageUrl3').val(ossuploader3.imageStr);
+                        $('#container3').find('.imageShow').attr('src', ossuploader3.imageStr);
+                        $('#container3').find('.imageWarp').show();
+
+                    }
+                    else {
+                        alert(info.response);
+                        // contain.find('#'+file.id).find('b')[0].innerHTML = info.response;
+                    }
+                }
+            }
+        }
+    );
+
+    ossuploader3.init();
+	var imageShow = $('.imageShow');
+	if (imageShow.attr('src') != ''){
+		$('.imageWarp').show();
 	}
-);
 
-ossuploader1.init();
+    var ossuploader4 = new plupload.Uploader({
+            runtimes           : 'html5,flash,silverlight,html4',
+            //1.-----------------------------------------------------------------------------------------------------
+            browse_button      : 'selectfiles4',
+            //multi_selection: false,
+            flash_swf_url      : 'lib/plupload-2.1.2/js/Moxie.swf',
+            silverlight_xap_url: 'lib/plupload-2.1.2/js/Moxie.xap',
+            url                : 'http://oss.aliyuncs.com',
+            filters            : {
+                mime_types        : [ //只允许上传图片和zip,rar文件
+                    {title: "Image files", extensions: "jpg,gif,png,bmp"}
+                ],
+                max_file_size     : '2mb', //最大只能上传2mb的文件
+                prevent_duplicates: false //不允许选取重复文件
+            },
+            imageStr:'',
+            init: {
+                PostInit: function () {
+                    // 3 .选择文件的按钮 -------------------------------------------------------------------------------------
+                    $('#container4').find('#postfiles4').click(function () {
+                        // 4.此处uploader要改------------------------------------------------
+                        set_upload_param(ossuploader4, '', false);
+                        return false;
+                    });
+                },
+                FilesAdded: function (up, files) {
+                    plupload.each(files, function (file) {
+                        //5-------------------------------------------------------------------------------------------------
+                        $('#container4').find('#ossfile').html('<div id="' + file.id + '"><div class="file"><span class="filename">' + file.name + ' (' + plupload.formatSize(file.size) + ')</span><b></b>'
+                            + '<div class="progress"><div class="progress-bar" style="width: 0%"></div></div>'
+                            + '</div>');
+                    });
+                },
+                BeforeUpload: function (up, file) {
+                    check_object_radio();
+                    set_upload_param(up, file.name, true);
+                },
+                UploadProgress: function (up, file) {
 
+                    //6------------------------------------------------------------------------------------------------------
+                    var d                  = $('#container4').find('#' + file.id);
+                    d.find('b').eq(0).html = '<span>' + file.percent + "%</span>";
+                    var prog               = d.find('.progress').eq(0);
+                    var progBar            = prog.find('.progress-bar')[0];
+                    progBar.style.width    = 2 * file.percent + 'px';
+                    progBar.setAttribute('aria-valuenow', file.percent);
+                },
 
+                FileUploaded: function (up, file, info) {
+                    if (typeof isSingle == 'undefined') {
+                        isSingle = true;
+                    }
+                    if (info.status == 200) {
+                        $('#container4').find('#' + file.id).find('b')[0].innerHTML = '上传成功';
+                        console.log(host + '/' + get_uploaded_object_name(file.name));
+                        if (isSingle) {
+                            ossuploader4.imageStr = host + '/' + get_uploaded_object_name(file.name);
+                        } else {
+                            ossuploader4.imageStr += host + '/' + get_uploaded_object_name(file.name) + '::::::';
+                        }
+                        //8-----------------------------------------------------------------------------------
+                        $('#imageUrl4').val(ossuploader4.imageStr);
+                        $('#container4').find('.imageShow').attr('src', ossuploader4.imageStr);
+                        $('#container4').find('.imageWarp').show();
 
-var imageShow = $('.imageShow');
-if (imageShow.attr('src') != ''){
-	$('.imageWarp').show();
-}
+                    }
+                    else {
+                        alert(info.response);
+                        // contain.find('#'+file.id).find('b')[0].innerHTML = info.response;
+                    }
+                }
+            }
+        }
+    );
+
+    ossuploader4.init();
+    var imageShow = $('.imageShow');
+    if (imageShow.attr('src') != ''){
+        $('.imageWarp').show();
+    }
+
+})
 
 
 
