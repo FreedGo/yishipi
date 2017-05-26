@@ -74,6 +74,8 @@ if(!defined('InEmpireCMS'))
 </td></tr><tr><td width='16%' height=25 bgcolor='ffffff'>包装方式</td><td bgcolor='ffffff'>
 <input name="pack_way" type="text" id="pack_way" value="<?=$ecmsfirstpost==1?"":ehtmlspecialchars(stripSlashes($r[pack_way]))?>" size="">
 </td></tr><tr><td width='16%' height=25 bgcolor='ffffff'>建议零售价</td><td bgcolor='ffffff'><input name="dan_price" type="text" id="dan_price" value="<?=$ecmsfirstpost==1?"":ehtmlspecialchars(stripSlashes($r[dan_price]))?>" size="">
+</td></tr><tr><td width='16%' height=25 bgcolor='ffffff'>体积</td><td bgcolor='ffffff'>
+<input name="volume" type="text" id="volume" value="<?=$ecmsfirstpost==1?"":ehtmlspecialchars(stripSlashes($r[volume]))?>" size="">
 </td></tr><tr><td width='16%' height=25 bgcolor='ffffff'>单价</td><td bgcolor='ffffff'><input name="tprice" type="text" id="tprice" value="<?=$ecmsfirstpost==1?"":ehtmlspecialchars(stripSlashes($r[tprice]))?>" size="60">
 </td></tr><tr><td width='16%' height=25 bgcolor='ffffff'>箱价</td><td bgcolor='ffffff'><input name="price" type="text" id="price" value="<?=$ecmsfirstpost==1?"":ehtmlspecialchars(stripSlashes($r[price]))?>" size="60">
 </td></tr><tr><td width='16%' height=25 bgcolor='ffffff'>价格浮动</td><td bgcolor='ffffff'><style>

@@ -430,24 +430,16 @@ if(!defined('InEmpireCMS'))
 
   <tr bgcolor="#FFFFFF"> 
     <td height="22" valign="top"><strong>产品图正则：</strong><br>
-      ( 
-      <input name="textfield" type="text" id="textfield" value="[!--productpic--]" size="20">
-      )</td>
+      (<input name="textfield" type="text" id="textfield" value="[!--productpic--]" size="20">)</td>
     <td><table width="100%" border="0" cellspacing="1" cellpadding="3">
-    <tr>
-      <td>附件前缀 
-        <input name="add[qz_productpic]" type="text" id="add[qz_productpic]" value="<?=stripSlashes($r[qz_productpic])?>"> 
-        <input name="add[save_productpic]" type="checkbox" id="add[save_productpic]" value=" checked"<?=$r[save_productpic]?>>
-        远程保存 </td>
-    </tr>
-    <tr> 
-      <td><textarea name="add[zz_productpic]" cols="60" rows="10" id="add[zz_productpic]"><?=ehtmlspecialchars(stripSlashes($r[zz_productpic]))?></textarea></td>
-    </tr>
-    <tr> 
-      <td><input name="add[z_productpic]" type="text" id="productpic5" value="<?=stripSlashes($r[z_productpic])?>">
-        (如填写这里，这就是字段的值)</td>
-    </tr>
-  </table></td>
+        <tr> 
+          <td><textarea name="add[zz_productpic]" cols="60" rows="10" id="textarea"><?=ehtmlspecialchars(stripSlashes($r[zz_productpic]))?></textarea></td>
+        </tr>
+        <tr> 
+          <td><input name="add[z_productpic]" type="text" id="add[z_productpic]" value="<?=stripSlashes($r[z_productpic])?>">
+            (如填写这里，将为字段的值)</td>
+        </tr>
+      </table></td>
   </tr>
 
   <tr bgcolor="#FFFFFF"> 

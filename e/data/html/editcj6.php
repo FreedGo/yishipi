@@ -269,35 +269,18 @@ $('#price').keyup(function(){
 <input name="tiji" type="text" id="tiji" value="<?=$ecmsfirstpost==1?"":ehtmlspecialchars(stripSlashes($r[tiji]))?>" size="">
 </td></tr><tr><td bgcolor=ffffff>服务</td><td bgcolor=ffffff>
 <input name="fuwu" type="text" id="fuwu" value="<?=$ecmsfirstpost==1?"":ehtmlspecialchars(stripSlashes($r[fuwu]))?>" size="">
-</td></tr><tr><td bgcolor=ffffff>产品图</td><td bgcolor=ffffff><link rel="stylesheet" type="text/css" href="/zjk/oss/webuploader.css" />
-<link rel="stylesheet" type="text/css" href="/zjk/oss/style.css" />
-<input type="hidden" name="productpic" value="" id="photos" />
-  <div id="wrapper">
-        <div id="container">
-            <!--头部，相册选择和格式选择-->
-
-            <div id="uploader">
-                <div class="queueList">
-                    <div id="dndArea" class="placeholder">
-                        <div id="filePicker"></div>
-                        <!--<p>或将照片拖到这里，单次最多可选300张</p>-->
-                    </div>
-                </div>
-                <div class="statusBar" style="display:none;">
-                    <div class="progress">
-                        <span class="text">0%</span>
-                        <span class="percentage"></span>
-                    </div><div class="info"></div>
-                    <div class="btns">
-                        <div id="filePicker2"></div><div class="uploadBtn">开始上传</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script type="text/javascript" src="/zjk/oss/jquery.js"></script>
-    <script type="text/javascript" src="/zjk/oss/webuploader.js"></script>
-    <script type="text/javascript" src="/zjk/oss/upload.js"></script></td></tr><tr><td bgcolor=ffffff>产品图2</td><td bgcolor=ffffff><input name="imgtwo" type="text" id="imgtwo" value="<?=$ecmsfirstpost==1?"":ehtmlspecialchars(stripSlashes($r[imgtwo]))?>" size="45">
+</td></tr><tr><td bgcolor=ffffff>产品图</td><td bgcolor=ffffff><div style="width:90%">
+<?php
+	$poto=substr($r['productpic'], 0, -6);
+	 $flid1=explode("::::::",$poto); 
+		$length = count($flid1);
+	for($i=0;$i<$length;$i++){
+       echo "<img src='$flid1[$i]' width='100'/>&nbsp;";
+	}
+?>
+</div>
+<input type="hidden" name="productpic" value="<?=$r[productpic]?>"/>
+</td></tr><tr><td bgcolor=ffffff>产品图2</td><td bgcolor=ffffff><input name="imgtwo" type="text" id="imgtwo" value="<?=$ecmsfirstpost==1?"":ehtmlspecialchars(stripSlashes($r[imgtwo]))?>" size="45">
 <a onclick="window.open('ecmseditor/FileMain.php?type=1&classid=<?=$classid?>&infoid=<?=$id?>&filepass=<?=$filepass?>&sinfo=1&doing=1&field=imgtwo<?=$ecms_hashur[ehref]?>','','width=700,height=550,scrollbars=yes');" title="选择已上传的图片"><img src="../data/images/changeimg.gif" border="0" align="absbottom"></a> 
 </td></tr><tr><td bgcolor=ffffff>产品图3</td><td bgcolor=ffffff><input name="imgthree" type="text" id="imgthree" value="<?=$ecmsfirstpost==1?"":ehtmlspecialchars(stripSlashes($r[imgthree]))?>" size="45">
 <a onclick="window.open('ecmseditor/FileMain.php?type=1&classid=<?=$classid?>&infoid=<?=$id?>&filepass=<?=$filepass?>&sinfo=1&doing=1&field=imgthree<?=$ecms_hashur[ehref]?>','','width=700,height=550,scrollbars=yes');" title="选择已上传的图片"><img src="../data/images/changeimg.gif" border="0" align="absbottom"></a> 
