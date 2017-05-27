@@ -23,6 +23,29 @@ require(ECMS_PATH . 'e/template/incfile/header.php');
 						var form = layui.form(),
 						    layer= layui.layer,
 						    laydate = layui.laydate;
+
+						form.on('submit(formDemo)', function(data){
+							// layer.alert(JSON.stringify(data.field), {
+							// 	title: '最终的提交信息'
+							// })
+							console.log(data.field);
+							if (data.field.titlepic == ''){
+								layer.alert('请上传商品缩略图');
+								return false;
+							}else if(data.field.bill_path == ''){
+								layer.alert('请上传过关单');
+								return false;
+							}
+							else if(data.field.pass_customs_path == ''){
+								layer.alert('请上传过税单');
+								return false;
+							}
+							else if(data.field.health_detection_path == ''){
+								layer.alert('请上传卫生检测证明');
+								return false;
+							}
+							// return false;
+						});
 					})
 				</script>
 				<h3><?= $word ?></h3>
@@ -45,7 +68,12 @@ require(ECMS_PATH . 'e/template/incfile/header.php');
 						<?php
 						@include($modfile);
 						?>
-						<div class="mt10"><input type="submit" name="Submit" value="提交" class="button small green">
+						<!--<div class="mt10"><input type="submit" name="Submit" value="提交" class="button small green">-->
+						<!--</div>-->
+						<div class="layui-form-item">
+							<div class="layui-input-block">
+								<button class="layui-btn layui-btn-yi" style="display: block;width:100%;" lay-submit lay-filter="formDemo">立即提交</button>
+							</div>
 						</div>
 					</div>
 				</form>
